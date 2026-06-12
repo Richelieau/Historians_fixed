@@ -1,29 +1,131 @@
 <?php
-include "../config.php";
-include "auth.php";
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/auth.php';
+/** @var mysqli $conn */
+// =====================
+// CEK ID
+// =====================
+if (!isset($_GET['id'])) {
+    die("ID tidak ditemukan!");
+}
 
-$id=$_GET['id'];
-$d=mysqli_fetch_assoc(mysqli_query($conn,"SELECT * FROM Historians_fixed WHERE id=$id"));
+$id = $_GET['id'];
 
-if(isset($_POST['update'])){
- mysqli_query($conn,"UPDATE history SET
- title='$_POST[title]',
- content='$_POST[content]'
- sumber='$_POST[sumber]'
- WHERE id=$id");
- header("Location: dashboard.php");
+// =====================
+// AMBIL DATA LAMA
+// =====================
+$data = mysqli_query($conn, "SELECT * FROM history WHERE id='$id'");
+$d = mysqli_fetch_assoc($data);
+
+if (!$d) {
+    die("Data tidak ditemukan!");
+}
+
+// =====================
+// PROSES UPDATE
+// =====================
+if (isset($_POST['submit'])) {
+    $title   = $_POST['title'];
+    $content = $_POST['content'];
+
+    // =====================
+    // CEK APAKAH UPLOAD GAMBAR BARU
+    // =====================
+    if (!empty($_FILES['foto']['name'])) {
+
+        $foto = $_FILES['foto']['name'];
+        $tmp  = $_FILES['foto']['tmp_name'];
+
+        // pindahkan file
+        move_uploaded_file($tmp, "../uploads/" . $foto);
+
+        // update + foto baru
+        mysqli_query($conn, "UPDATE history SET
+            title='$title',
+            content='$content',
+            foto='$foto'
+            WHERE id='$id'
+        ");
+
+    } else {
+
+        // update tanpa ubah foto
+        mysqli_query($conn, "UPDATE history SET
+            title='$title',
+            content='$content'
+            WHERE id='$id'
+        ");
+    }
+
+    header("Location: dashboard.php");
+    exit;
 }
 ?>
 
-<link rel="stylesheet" href="../assets/style.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Data</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            padding: 30px;
+        }
 
-<div class="admin-wrap">
-<h2>Edit History</h2>
+        .box {
+            background: white;
+            padding: 25px;
+            width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
-<form method="POST" class="admin-form">
-<input name="title" value="<?=$d['title']?>">
-<textarea name="content"><?=$d['content']?></textarea>
-<button name="update">Update</button>
-</form>
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
 
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #4facfe;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        img {
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Edit Data</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="title" value="<?= $d['title'] ?>" required>
+
+        <textarea name="content" required><?= $d['content'] ?></textarea>
+
+        <!-- TAMPILKAN FOTO LAMA -->
+        <p>Foto saat ini:</p>
+        <img src="../uploads/<?= $d['foto'] ?>" width="100">
+
+        <br><br>
+
+        <!-- UPLOAD FOTO BARU -->
+        <input type="file" name="foto">
+
+        <button name="submit">Update</button>
+    </form>
 </div>
+
+</body>
+</html>

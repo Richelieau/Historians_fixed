@@ -1,7 +1,8 @@
 <?php
 session_start();
-include "../config.php";
-include "auth.php";
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/auth.php';
+/** @var mysqli $conn */
 
 if(isset($_POST['save'])){
 

@@ -226,8 +226,21 @@ section h2{
  font-size:15px;
 }
 
-/* == History Card === */
+/* == agar tidak biru buttonnya === */
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: white;
+  color: black;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
+.btn:hover {
+  background: #ddd;
+}
 
 /* =========================
    IMAGE INSIDE CARD

@@ -18,6 +18,7 @@
     <li onclick="go('about')">About</li>
     <li onclick="go('history')">History</li>
     <li onclick="go('featured')">Featured</li>
+    <li onclick="go('shopping')">Shopping</li>
     <li><a href="login.php">Login</a></li>
   </ul>
 </nav>
@@ -111,7 +112,8 @@
       <img src="uploads/<?= $d['foto'] ?>">
       <h3><?= $d['title'] ?></h3>
       <p><?= substr($d['content'],0,140) ?>...</p>
-     <a href=""> <button onclick="go('$sumber')">Read More!</button></a>
+      <!-- <a href="detail.php?id=<?= $d['id'] ?>"><button onclick="window.location.href='detail.php?id=<?= $d['id'] ?>'">Read More</button></a> -->
+      <button onclick="window.location.href='detail.php?id=<?= $d['id'] ?>'">Read More</button>
     </div>
 
     <?php } ?>
@@ -135,6 +137,61 @@
   <button onclick="location.href='login.php'">
     Login & Kelola Data
   </button>
+
+</section>
+
+<!-- Shopping Section -->
+<section id="shopping" class="bg-section bg-about">
+
+<h2>Buku Sejarah Pilihan</h2>
+
+<p>
+Temukan berbagai buku sejarah terbaik untuk memperdalam wawasan tentang peradaban dunia, peperangan, revolusi, dan sejarah Indonesia.
+</p>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="https://images-na.ssl-images-amazon.com/images/I/91SZSW8qSsL.jpg">
+    <h3>Sapiens</h3>
+    <p>Yuval Noah Harari</p>
+    <a href="https://www.gramedia.com" target="_blank">
+      <button>Beli Buku</button>
+    </a>
+  </div>
+
+  <div class="card">
+    <img src="https://images-na.ssl-images-amazon.com/images/I/81-QB7nDh4L.jpg">
+    <h3>Guns, Germs, and Steel</h3>
+    <p>Jared Diamond</p>
+    <a href="https://www.gramedia.com" target="_blank">
+      <button>Beli Buku</button>
+    </a>
+  </div>
+
+  <div class="card">
+    <img src="https://images-na.ssl-images-amazon.com/images/I/81l3rZK4lnL.jpg">
+    <h3>A People's History</h3>
+    <p>Howard Zinn</p>
+    <a href="https://www.gramedia.com" target="_blank">
+      <button>Beli Buku</button>
+    </a>
+  </div>
+
+  <div class="card">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Madilog_cover.jpg/800px-Madilog_cover.jpg">
+  <h3>Madilog</h3>
+  <p>Tan Malaka</p>
+  <p>
+  Karya monumental Tan Malaka yang memperkenalkan konsep Materialisme,
+  Dialektika, dan Logika sebagai dasar berpikir kritis bagi bangsa Indonesia.
+  Buku ini menjadi salah satu karya intelektual paling berpengaruh dalam sejarah pemikiran Indonesia.
+  </p>
+  <a href="https://www.gramedia.com" target="_blank">
+    <button>Beli Buku</button>
+  </a>
+  </div>
+</div>
 
 </section>
 
