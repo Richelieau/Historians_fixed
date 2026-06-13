@@ -134,6 +134,10 @@ http://localhost/Historians_fixed
 
 ---
 
+## Main Update
+
+Penambahan section Shopping bagi user dalam membantu mereka memahami pelajar sejarah ini dengan membeli buku buku valid akan kebenarannya!
+
 ## 🎯 Tujuan Pengembangan
 
 Historians dikembangkan sebagai media pembelajaran sejarah digital yang lebih menarik dan interaktif dibandingkan metode konvensional. Platform ini bertujuan membantu siswa, mahasiswa, maupun masyarakat umum dalam memahami berbagai peristiwa sejarah melalui visualisasi dan penyajian informasi yang terstruktur.
